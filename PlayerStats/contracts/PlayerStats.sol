@@ -26,12 +26,13 @@ contract PlayerStats {
     mapping (address => Coach) public coaches;
 
     function addCoach(string memory _name, string memory _teamName) public {
-        require(coaches[msg.sender].id != msg.sender, "This coach already exists!");
+        require(coaches[msg.sender].id == address(0), "This coach already exists!");
 
-        coaches[msg.sender].name = _name;
-        coaches[msg.sender].id = msg.sender;
-        coaches[msg.sender].teamName = _teamName;
-        coaches[msg.sender].playerCount = 0;
+        Coach storage newCoach = coaches[msg.sender];
+        newCoach.name = _name;
+        newCoach.id = msg.sender;
+        newCoach.teamName = _teamName;
+        newCoach.playerCount = 0;
     }
 
     function addPlayer(string memory _name, uint256 _age, string memory _position) public {
@@ -70,9 +71,5 @@ contract PlayerStats {
         Player memory p = players[_name];
         return (p.name, p.age, p.teamName, p.position, coaches[p.coachid].name, p.gamesPlayed, p.goalsScored, p.minutesPlayed);
 
-    }
-
-    function getCoach(address _id) public view returns (string memory, address, string memory) {
-        return (coaches[_id].name, coaches[_id].id, coaches[_id].teamName);
     }
 }

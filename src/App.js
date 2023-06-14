@@ -6,7 +6,7 @@ import "./App.css";
 // Access our wallet inside of our dapp
 const web3 = new Web3(Web3.givenProvider);
 // Contract address of the deployed smart contract
-const contractAddress = "0x709dF0Db4F0C5d8C1CA684b6c8e4a07408Ad4fEb";
+const contractAddress = "0xFF6B1f7F7EB49d1ADC5BdDD025858Bc5bE93D08A";
 const playerStatsContract = new web3.eth.Contract(PlayerStats, contractAddress);
 
 function App() {
